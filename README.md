@@ -15,3 +15,13 @@ here is what I was able to do today
 ----
 
 ![lib_2](https://user-images.githubusercontent.com/26482766/37128721-ac4abb3e-227b-11e8-9984-d0f39d465cfb.PNG)
+
+# Update
+Now all buttons works.
+
+## Add
+Simply enter all data (data validation for year and pages not added yet).
+## Update
+If you want to update you books you have to enter its title. Unfortunately you can't change books title :/
+## Delete
+All you need is to enter title.
