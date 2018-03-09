@@ -6,6 +6,7 @@ public class Book {
 	private int year;
 	private int pages;
 	
+	
 	public String getTitle() {
 		return title;
 	}
@@ -39,5 +40,6 @@ public class Book {
 		this.year=year;
 		this.pages=pages;
 	}
+
 	
 }

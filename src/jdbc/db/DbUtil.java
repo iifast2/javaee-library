@@ -38,20 +38,85 @@ public class DbUtil {
 		}
 		return booksList;
 	}
- /* to be continued
-  * 
+
     public static int insert(String title, String author, int year, int pages) {
-        int rowsAffected = 0;
+    	int rowsAffected = 0;
         Connection conn = null;
         Statement statement = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+            statement = conn.createStatement();
+            String query = "INSERT INTO books (Title,Author,Year,Pages) VALUES ('"+title+"','"+author+"',"+year+","+pages+")";
+                   
+            rowsAffected = statement.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseResources(statement, null, conn);
+        }
+        return rowsAffected;
+
+    }
+    
+    public static int update(String title, String author, int year, int pages) {
+    	int rowsAffected = 0;
+        Connection conn = null;
+        Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+            statement = conn.createStatement();
+            String selectQuery = "SELECT ID FROM books WHERE " + ("Title = " + "\""+title+"\"");
+            resultSet = statement.executeQuery(selectQuery);
+            if(resultSet.next()) {
+            	String updateQuery = "UPDATE books SET Author='"+author+"',Year="+year+",Pages="+pages+" WHERE ID="+resultSet.getInt(1);
+                rowsAffected = statement.executeUpdate(updateQuery);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseResources(statement, null, conn);
+        }
+        return rowsAffected;
 
     }
 
     public static int delete(String title) {
+    	int rowsAffected = 0;
         Connection conn = null;
         Statement statement = null;
+        ResultSet resultSet = null;
+        try {
+            conn = ConnectionProvider.getConnection();
+            statement = conn.createStatement();
+            String selectQuery = "SELECT ID FROM books WHERE " + ("Title = " + "\""+title+"\"");
+            resultSet = statement.executeQuery(selectQuery);
+            if(resultSet.next()) {
+                String deleteQuery = "DELETE FROM books WHERE ID="+resultSet.getInt(1);
+                rowsAffected = statement.executeUpdate(deleteQuery);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            releaseResources(statement, resultSet, conn);
+        }
+        return rowsAffected;
        
     }
- */    
+    
+    private static void releaseResources(Statement st, ResultSet rst, Connection conn) {
+        try {
+            if(st != null && !st.isClosed())
+                st.close();
+            if(rst != null && !rst.isClosed())
+                rst.close();
+            if(conn != null && !conn.isClosed())
+                conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
  
 }
