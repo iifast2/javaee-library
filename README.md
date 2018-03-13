@@ -3,9 +3,6 @@ JavaEE, Tomcat, MySQL
 
 I started first JavaEE project and it's web library - not so simple as I thought
 
-right now it's 3am so that's all for today
-
-later I'm going to execute rest of the queries
 
 ## MySQL Database
 First of all you need to create your database `Library` then you have to create table called `books`
